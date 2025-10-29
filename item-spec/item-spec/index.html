@@ -1,0 +1,1654 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="SpatioTemporal Asset Catalog specification - making geospatial assets openly searchable and crawlable">
+      
+      
+      
+        <link rel="canonical" href="https://radiantearth.github.io/stac-spec/item-spec/item-spec/">
+      
+      
+        <link rel="prev" href="../..">
+      
+      
+        <link rel="next" href="../">
+      
+      
+      <link rel="icon" href="../../img/STAC-04.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.22">
+    
+    
+      
+        <title>Specification - STAC</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#stac-item-specification" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="STAC" class="md-header__button md-logo" aria-label="STAC" data-md-component="logo">
+      
+  <img src="../../img/STAC-04.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            STAC
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Specification
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/radiantearth/stac-spec" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="STAC" class="md-nav__button md-logo" aria-label="STAC" data-md-component="logo">
+      
+  <img src="../../img/STAC-04.png" alt="logo">
+
+    </a>
+    STAC
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/radiantearth/stac-spec" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Specifications
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Specifications
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Item
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            Item
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Specification
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Specification
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#item-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      Item fields
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Item fields">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stac_version" class="md-nav__link">
+    <span class="md-ellipsis">
+      stac_version
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stac_extensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      stac_extensions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#id" class="md-nav__link">
+    <span class="md-ellipsis">
+      id
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#geometry" class="md-nav__link">
+    <span class="md-ellipsis">
+      geometry
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bbox" class="md-nav__link">
+    <span class="md-ellipsis">
+      bbox
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#collection" class="md-nav__link">
+    <span class="md-ellipsis">
+      collection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      properties
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="properties">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#properties-object" class="md-nav__link">
+    <span class="md-ellipsis">
+      Properties Object
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datetime" class="md-nav__link">
+    <span class="md-ellipsis">
+      datetime
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#additional-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      Additional Fields
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#links" class="md-nav__link">
+    <span class="md-ellipsis">
+      Links
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Links">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#relation-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Relation types
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#collections" class="md-nav__link">
+    <span class="md-ellipsis">
+      Collections
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#assets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Assets
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#media-type-for-stac-item" class="md-nav__link">
+    <span class="md-ellipsis">
+      Media Type for STAC Item
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Extensions
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    About
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../common-metadata/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Common metadata
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Collection
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Collection
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../collection-spec/collection-spec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Specification
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../collection-spec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    About
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Catalog
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Catalog
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../catalog-spec/catalog-spec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Specification
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../catalog-spec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    About
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Commons
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Commons
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../commons/assets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Assets
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../commons/links/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Links
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../commons/common-metadata/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Common metadata
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Additional information
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Additional information
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../principles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Principles
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../extensions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Extensions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examples
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../best-practices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Best practices
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#item-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      Item fields
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Item fields">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stac_version" class="md-nav__link">
+    <span class="md-ellipsis">
+      stac_version
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stac_extensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      stac_extensions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#id" class="md-nav__link">
+    <span class="md-ellipsis">
+      id
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#geometry" class="md-nav__link">
+    <span class="md-ellipsis">
+      geometry
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bbox" class="md-nav__link">
+    <span class="md-ellipsis">
+      bbox
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#collection" class="md-nav__link">
+    <span class="md-ellipsis">
+      collection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      properties
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="properties">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#properties-object" class="md-nav__link">
+    <span class="md-ellipsis">
+      Properties Object
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datetime" class="md-nav__link">
+    <span class="md-ellipsis">
+      datetime
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#additional-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      Additional Fields
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#links" class="md-nav__link">
+    <span class="md-ellipsis">
+      Links
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Links">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#relation-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Relation types
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#collections" class="md-nav__link">
+    <span class="md-ellipsis">
+      Collections
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#assets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Assets
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#media-type-for-stac-item" class="md-nav__link">
+    <span class="md-ellipsis">
+      Media Type for STAC Item
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Extensions
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="stac-item-specification">STAC Item Specification <!-- omit in toc --></h1>
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#item-fields">Item fields</a></li>
+<li><a href="#stac_version">stac_version</a></li>
+<li><a href="#stac_extensions">stac_extensions</a></li>
+<li><a href="#id">id</a></li>
+<li><a href="#geometry">geometry</a></li>
+<li><a href="#bbox">bbox</a></li>
+<li><a href="#collection">collection</a></li>
+<li><a href="#properties">properties</a><ul>
+<li><a href="#properties-object">Properties Object</a></li>
+<li><a href="#datetime">datetime</a></li>
+<li><a href="#additional-fields">Additional Fields</a></li>
+</ul>
+</li>
+<li><a href="#links">Links</a><ul>
+<li><a href="#relation-types">Relation types</a></li>
+<li><a href="#collections">Collections</a></li>
+</ul>
+</li>
+<li><a href="#assets">Assets</a></li>
+<li><a href="#media-type-for-stac-item">Media Type for STAC Item</a></li>
+<li><a href="#extensions">Extensions</a></li>
+</ul>
+<h2 id="overview">Overview</h2>
+<p>This document explains the structure and content of a SpatioTemporal Asset Catalog (STAC) Item. An <strong>Item</strong> is a
+<a href="http://geojson.org/">GeoJSON</a> <a href="https://tools.ietf.org/html/rfc7946#section-3.2">Feature</a> augmented with
+<a href="https://tools.ietf.org/html/rfc7946#section-6">foreign members</a> relevant to a STAC object.
+These include fields that identify the time range and assets of the Item. An Item is the core
+object in a STAC Catalog, containing the core metadata that enables any client to search or crawl
+online catalogs of spatial 'assets' (e.g., satellite imagery, derived data, DEMs).</p>
+<p>The same Item definition is used in both <a href="../../catalog-spec/">STAC Catalogs</a> and
+the <a href="https://github.com/radiantearth/stac-api-spec/blob/master/api-spec.md#ogc-api---features-endpoints">Item-related API endpoints</a>.
+Catalogs are simply sets of Items that are linked online, generally served by simple web servers
+and used for crawling data. The search endpoint enables dynamic queries, for example selecting all
+Items in Hawaii on June 3, 2015, but the results they return are FeatureCollections of Items.</p>
+<p>Items are represented in JSON format and are very flexible. Any JSON object that contains all the
+required fields is a valid STAC Item.</p>
+<ul>
+<li>Examples:</li>
+<li>See the <a href="../../examples/simple-item.json">minimal example</a>,
+    as well as a <a href="../../examples/core-item.json">more fleshed example</a> that contains a number of current best practices.</li>
+<li>Real world <a href="https://stacindex.org/catalogs">implementations</a> are also available.</li>
+<li><a href="https://schemas.stacspec.org/v1.1.0/item-spec/json-schema/item.json">JSON Schema</a></li>
+</ul>
+<h2 id="item-fields">Item fields</h2>
+<p>This object describes a STAC Item. The fields <code>id</code>, <code>type</code>, <code>bbox</code>, <code>geometry</code> and <code>properties</code> are
+inherited from GeoJSON.</p>
+<table>
+<thead>
+<tr>
+<th>Field Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>string</td>
+<td><strong>REQUIRED.</strong> Type of the GeoJSON Object. MUST be set to <code>Feature</code>.</td>
+</tr>
+<tr>
+<td>stac_version</td>
+<td>string</td>
+<td><strong>REQUIRED.</strong> The STAC version the Item implements.</td>
+</tr>
+<tr>
+<td>stac_extensions</td>
+<td>[string]</td>
+<td>A list of extensions the Item implements.</td>
+</tr>
+<tr>
+<td>id</td>
+<td>string</td>
+<td><strong>REQUIRED.</strong> Provider identifier. The ID should be unique within the <a href="../../collection-spec/collection-spec/">Collection</a> that contains the Item.</td>
+</tr>
+<tr>
+<td>geometry</td>
+<td>GeoJSON Geometry Object | null</td>
+<td><strong>REQUIRED.</strong> Defines the full footprint of the asset represented by this item, formatted according to RFC 7946, <a href="https://tools.ietf.org/html/rfc7946#section-3.1">section 3.1</a> if a geometry is provided or <a href="https://tools.ietf.org/html/rfc7946#section-3.2">section 3.2</a> if <em>no</em> geometry is provided.</td>
+</tr>
+<tr>
+<td>bbox</td>
+<td>[number]</td>
+<td><strong>REQUIRED if <code>geometry</code> is not <code>null</code>, prohibited if <code>geometry</code> is <code>null</code>.</strong> Bounding Box of the asset represented by this Item, formatted according to <a href="https://tools.ietf.org/html/rfc7946#section-5">RFC 7946, section 5</a>.</td>
+</tr>
+<tr>
+<td>properties</td>
+<td><a href="#properties-object">Properties Object</a></td>
+<td><strong>REQUIRED.</strong> A dictionary of additional metadata for the Item.</td>
+</tr>
+<tr>
+<td>links</td>
+<td>[<a href="#links">Link Object</a>]</td>
+<td><strong>REQUIRED.</strong> List of link objects to resources and related URLs. See the <a href="../../best-practices/#use-of-links">best practices</a> for details on when the use <code>self</code> links is strongly recommended.</td>
+</tr>
+<tr>
+<td>assets</td>
+<td>Map<string, <a href="#assets">Asset Object</a>></td>
+<td><strong>REQUIRED.</strong> Dictionary of asset objects that can be downloaded, each with a unique key.</td>
+</tr>
+<tr>
+<td>collection</td>
+<td>string</td>
+<td>The <code>id</code> of the STAC Collection this Item references to. This field is <strong>required</strong> if a link with a <code>collection</code> relation type is present and is <strong>not allowed</strong> otherwise.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="stac_version">stac_version</h3>
+<p>In general, STAC versions can be mixed, but please keep the <a href="../../best-practices/#mixing-stac-versions">recommended best practices</a> in mind.</p>
+<h3 id="stac_extensions">stac_extensions</h3>
+<p>A list of extensions the Item implements.
+The list consists of URLs to JSON Schema files that can be used for validation.
+This list must only contain extensions that extend the Item specification itself,
+see the 'Scope' for each of the extensions.</p>
+<h3 id="id">id</h3>
+<p>It is important that an Item identifier is unique within a Collection, and that the
+<a href="../../collection-spec/collection-spec/#id">Collection identifier</a> in turn is unique globally. Then the two can be combined to
+give a globally unique identifier. Items are <em><a href="#collections">strongly recommended</a></em> to have Collections, and not having one makes
+it more difficult to be used in the wider STAC ecosystem.
+If an Item does not have a Collection, then the Item identifier should be unique within its root Catalog or root Collection.</p>
+<p>As most geospatial assets are already uniquely defined by some 
+identification scheme from the data provider it is recommended to simply use that ID.
+Data providers are advised to include sufficient information to make their IDs globally unique,
+including things like unique satellite IDs.
+See the <a href="../../best-practices/#item-ids">id section of best practices</a> for additional recommendations.</p>
+<h3 id="geometry">geometry</h3>
+<p>Defines the full footprint of the asset represented by this item, formatted according to RFC 7946.</p>
+<p>If <strong>a geometry</strong> is provided, the value must be a Geometry Object according to
+<a href="https://tools.ietf.org/html/rfc7946#section-3.1">RFC 7946, section 3.1</a>
+with the exception that the type <code>GeometryCollection</code> is not allowed in STAC.
+If <strong>no geometry</strong> is provided, the value must be <code>null</code> according to
+<a href="https://tools.ietf.org/html/rfc7946#section-3.2">RFC 7946, section 3.2</a>.</p>
+<p>Coordinates are specified in Longitude/Latitude or Longitude/Latitude/Elevation based on <a href="http://www.opengis.net/def/crs/OGC/1.3/CRS84">WGS 84</a>.</p>
+<h3 id="bbox">bbox</h3>
+<p>Bounding Box of the asset represented by this Item using either 2D or 3D geometries,
+formatted according to <a href="https://tools.ietf.org/html/rfc7946#section-5">RFC 7946, section 5</a>.
+The length of the array must be 2*n where n is the number of dimensions.
+The array contains all axes of the southwesterly most extent followed by all axes of the northeasterly most extent specified in
+Longitude/Latitude or Longitude/Latitude/Elevation based on <a href="http://www.opengis.net/def/crs/OGC/1.3/CRS84">WGS 84</a>.
+When using 3D geometries, the elevation of the southwesterly most extent is the minimum depth/height in meters
+and the elevation of the northeasterly most extent is the maximum.
+This field enables more naive clients to easily index and search geospatially.
+STAC compliant APIs are required to compute intersection operations with the Item's geometry field, not its bbox.</p>
+<h3 id="collection">collection</h3>
+<p>The <code>id</code> of the STAC Collection this Item references to with the <a href="#relation-types"><code>collection</code> relation type</a> in the <code>links</code>  array.</p>
+<p>This field provides an easy way for a user to search for any Items that belong in a specified Collection.
+If present, must be a non-empty string.</p>
+<h3 id="properties">properties</h3>
+<h4 id="properties-object">Properties Object</h4>
+<p>Additional metadata fields can be added to the GeoJSON Object Properties. The only required field
+is <code>datetime</code> but it is recommended to add more fields, see <a href="#additional-fields">Additional Fields</a>
+resources below.</p>
+<table>
+<thead>
+<tr>
+<th>Field Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>datetime</td>
+<td>string|null</td>
+<td><strong>REQUIRED.</strong> The searchable date and time of the assets, which must be in UTC. It is formatted according to <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339, section 5.6</a>. <code>null</code> is allowed, but requires <code>start_datetime</code> and <code>end_datetime</code> from <a href="../../commons/common-metadata/#date-and-time-range">common metadata</a> to be set.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="datetime">datetime</h4>
+<p>This is likely the acquisition (in the case of single camera type captures) or the 'nominal'
+or representative time in the case of assets that are combined together. Though time can be a
+complex thing to capture, for this purpose keep in mind the STAC spec is primarily searching for
+data, so use whatever single date and time is most useful for a user to search for. STAC content
+extensions may further specify the meaning of the main <code>datetime</code> field, and many will also add more
+datetime fields. <strong>All times in STAC metadata should be in <a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">Coordinated Universal 
+Time</a> (UTC).</strong>
+If there's clearly no meaningful single 'nominal' time, it is allowed to use <code>null</code> instead.
+In this case it is <strong>required</strong> to specify a temporal interval with the fields <code>start_datetime</code>
+and <code>end_datetime</code> from <a href="../../commons/common-metadata/#date-and-time-range">common metadata</a>. For example, if
+your data is a time-series that covers 100 years, it's not very meaningful to set the datetime to a
+single timestamp as it would not be found in most searches that searches for a decade of data in that
+period although the Item actually covers the decade. See <a href="../../best-practices/#datetime-selection">datetime selection</a>
+in the best practices document for more information.</p>
+<h4 id="additional-fields">Additional Fields</h4>
+<p>Providers should include metadata fields that are relevant for users of STAC, but it is recommended
+to <a href="../../best-practices/#field-selection-and-metadata-linking">select only those necessary for search</a>.
+Where possible metadata fields should be mapped to the STAC Common Metadata and widely used extensions,
+to enable cross-catalog search on known fields.</p>
+<ul>
+<li><a href="../common-metadata/#stac-common-metadata">STAC Common Metadata</a> - A list of fields commonly used
+throughout all domains. These optional fields are included for STAC Items by default.</li>
+<li><a href="../../extensions/">Extensions</a> - Additional fields that are more specific,
+such as <a href="https://github.com/stac-extensions/eo">EO</a>, <a href="https://github.com/stac-extensions/view">View</a>.</li>
+<li><a href="../../extensions/#extending-stac">Custom Extensions</a> - It is generally allowed to add custom
+fields but it is recommended to add multiple fields for related values instead of a nested object,
+e.g., two fields <code>view:azimuth</code> and <code>view:off_nadir</code> instead of a field <code>view</code> with an object
+value containing the two fields. The convention (as used within Extensions) is for related fields 
+to use a common prefix on the field names to group them, e.g. <code>view</code>. A nested data structure should
+only be used when the data itself is nested, as with <code>bands</code>.</li>
+</ul>
+<h3 id="links">Links</h3>
+<p>Each link in the <code>links</code> array must be a <a href="../../commons/links/#link-object">Link Object</a>.</p>
+<h4 id="relation-types">Relation types</h4>
+<p>All <a href="../../commons/links/#relation-types">common relation types</a> except for <code>item</code> can be used in Items.
+A <code>self</code> and <code>collection</code> links are STRONGLY RECOMMENDED.
+A link with this <code>rel</code> type is <em>required</em> for STAC item if the <code>collection</code> field in properties is present.</p>
+<blockquote>
+<p>[!NOTE]
+Dynamic catalogs can implement multiple parents through a dynamic browsing interface as they could dynamically create the parent
+link based on the desired browsing structure (though only 1 parent at a time).
+Multiple parents are allowed for other types than <code>application/json</code>.</p>
+</blockquote>
+<h4 id="collections">Collections</h4>
+<p>Items are <em>strongly recommended</em> to provide a link to a STAC Collection definition.
+It is important as Collections provide additional information about a set of items,
+for example the license, provider and other information
+giving context on the overall set of data that an individual Item is a part of.</p>
+<p>If Items are part of a STAC Collection, the
+<a href="../../collection-spec/collection-spec/#relation-types">STAC Collection spec <em>requires</em> Items to link back to the Collection</a>.
+Linking back must happen in two places:</p>
+<ol>
+<li>The field <code>collection</code> in an Item must be filled (see section 'Item fields'). It is the <code>id</code> of a STAC Collection.</li>
+<li>An Item must also provide a link to the STAC Collection using the <a href="#relation-types"><code>collection</code> relation type</a>:
+   <code>js
+   "links": [
+     { "rel": "collection", "href": "link/to/collection/record.json" }
+   ]</code></li>
+</ol>
+<p>Multiple collections can point to an Item, but an Item can only point back to a single collection.</p>
+<h3 id="assets">Assets</h3>
+<p>The property <code>assets</code> is a dictionary of <a href="../../commons/assets/#asset-object">Asset Objects</a>, each with a unique key.
+Each asset refers to data associated with the Item that can be downloaded or streamed.
+This construct is further detailed in the <a href="../../commons/assets/">Assets</a> document.</p>
+<p>Assets in a STAC Item should include the main asset, as well as any 'sidecar' files that are related and help a
+client make sense of the data. Examples of this include extended metadata (in XML, JSON, etc.),
+unusable data masks, satellite ephemeris data, etc. Some assets (like Landsat data) are represented
+by multiple files - all should be linked to. It is generally recommended that different processing
+levels or formats are not exhaustively listed in an Item, but instead are represented by related
+Items that are linked to, but the best practices around this are still emerging.</p>
+<p>It is STRONGLY RECOMMENDED to add to each STAC Item</p>
+<ul>
+<li>a thumbnail with the role <code>thumbnail</code> for preview purposes</li>
+<li>one or more data files with the role <code>data</code></li>
+</ul>
+<h2 id="media-type-for-stac-item">Media Type for STAC Item</h2>
+<p>A STAC Item is a GeoJSON file (<a href="https://tools.ietf.org/html/rfc7946">RFC 7946</a>), and thus should use the
+<a href="https://tools.ietf.org/html/rfc7946#section-12"><code>application/geo+json</code></a> as the <a href="https://en.wikipedia.org/wiki/Media_type">Media Type</a>
+(previously known as the MIME Type).</p>
+<h2 id="extensions">Extensions</h2>
+<p>STAC Items are <a href="../../extensions/">extensible</a>.
+Please refer to the <a href="https://stac-extensions.github.io">extensions overview</a> to find relevant extensions for STAC Items.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://bsky.app/profile/stacspec.bsky.social" target="_blank" rel="noopener" title="bsky.app" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M407.8 294.7c-3.3-.4-6.7-.8-10-1.3 3.4.4 6.7.9 10 1.3M288 227.1c-26.1-50.7-97.1-145.2-163.1-191.8C61.6-9.4 37.5-1.7 21.6 5.5 3.3 13.8 0 41.9 0 58.4S9.1 194 15 213.9c19.5 65.7 89.1 87.9 153.2 80.7 3.3-.5 6.6-.9 10-1.4-3.3.5-6.6 1-10 1.4-93.9 14-177.3 48.2-67.9 169.9C220.6 589.1 265.1 437.8 288 361.1c22.9 76.7 49.2 222.5 185.6 103.4 102.4-103.4 28.1-156-65.8-169.9-3.3-.4-6.7-.8-10-1.3 3.4.4 6.7.9 10 1.3 64.1 7.1 133.6-15.1 153.2-80.7C566.9 194 576 75 576 58.4s-3.3-44.7-21.6-52.9c-15.8-7.1-40-14.9-103.2 29.8C385.1 81.9 314.1 176.4 288 227.1"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.linkedin.com/showcase/stacspec" target="_blank" rel="noopener" title="www.linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77m282.1 320h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

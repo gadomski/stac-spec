@@ -1,0 +1,3251 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="SpatioTemporal Asset Catalog specification - making geospatial assets openly searchable and crawlable">
+      
+      
+      
+        <link rel="canonical" href="https://radiantearth.github.io/stac-spec/best-practices/">
+      
+      
+        <link rel="prev" href="../examples/">
+      
+      
+      
+      <link rel="icon" href="../img/STAC-04.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.22">
+    
+    
+      
+        <title>Best practices - STAC</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#stac-best-practices" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="STAC" class="md-header__button md-logo" aria-label="STAC" data-md-component="logo">
+      
+  <img src="../img/STAC-04.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            STAC
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Best practices
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/radiantearth/stac-spec" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="STAC" class="md-nav__button md-logo" aria-label="STAC" data-md-component="logo">
+      
+  <img src="../img/STAC-04.png" alt="logo">
+
+    </a>
+    STAC
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/radiantearth/stac-spec" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Specifications
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Specifications
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Item
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            Item
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../item-spec/item-spec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Specification
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../item-spec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    About
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../item-spec/common-metadata/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Common metadata
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Collection
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Collection
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../collection-spec/collection-spec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Specification
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../collection-spec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    About
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Catalog
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Catalog
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../catalog-spec/catalog-spec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Specification
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../catalog-spec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    About
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Commons
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Commons
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../commons/assets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Assets
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../commons/links/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Links
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../commons/common-metadata/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Common metadata
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Additional information
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Additional information
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../principles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Principles
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../extensions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Extensions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examples
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Best practices
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Best practices
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table of Contents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#web-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Web Practices
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Web Practices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enable-cross-origin-resource-sharing-cors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enable Cross-origin resource sharing (CORS)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stac-on-the-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      STAC on the Web
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="STAC on the Web">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#schemaorg-json-ld-dcat-microformats-etc" class="md-nav__link">
+    <span class="md-ellipsis">
+      Schema.org, JSON-LD, DCAT, microformats, etc
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deploying-stac-browser" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deploying STAC Browser
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#requester-pays" class="md-nav__link">
+    <span class="md-ellipsis">
+      Requester Pays
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#consistent-uris" class="md-nav__link">
+    <span class="md-ellipsis">
+      Consistent URIs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#item-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Item Practices
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Item Practices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#item-ids" class="md-nav__link">
+    <span class="md-ellipsis">
+      Item IDs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#searchable-identifiers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Searchable Identifiers
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#field-selection-and-metadata-linking" class="md-nav__link">
+    <span class="md-ellipsis">
+      Field selection and Metadata Linking
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datetime-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Datetime selection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unlocated-items" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unlocated Items
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Unlocated Items">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unrectified-satellite-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unrectified Satellite Data
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-that-is-not-spatial" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data that is not spatial
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#representing-vector-layers-in-stac" class="md-nav__link">
+    <span class="md-ellipsis">
+      Representing Vector Layers in STAC
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#asset-and-link-best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Asset and Link Best Practices
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Asset and Link Best Practices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#common-use-cases-of-additional-fields-for-assets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common Use Cases of Additional Fields for Assets
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#titles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Titles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#working-with-media-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Working with Media Types
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Working with Media Types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#common-media-types-in-stac" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common Media Types in STAC
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#formats-with-no-registered-media-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      Formats with no registered media type
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#asset-roles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Asset Roles
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Asset Roles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#list-of-asset-roles" class="md-nav__link">
+    <span class="md-ellipsis">
+      List of Asset Roles
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bands" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bands
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Bands">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single-band" class="md-nav__link">
+    <span class="md-ellipsis">
+      Single band
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multiple-bands" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multiple bands
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#band-migration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Band migration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#catalog-collection-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Catalog &amp; Collection Practices
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Catalog &amp; Collection Practices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#static-and-dynamic-catalogs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Static and Dynamic Catalogs
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Static and Dynamic Catalogs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#static-catalogs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Static Catalogs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dynamic-catalogs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dynamic Catalogs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      Catalog Layout
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Catalog Layout">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dynamic-catalog-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dynamic Catalog Layout
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mixing-stac-versions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mixing STAC Versions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-summaries-in-collections" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using Summaries in Collections
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-of-links" class="md-nav__link">
+    <span class="md-ellipsis">
+      Use of links
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Use of links">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#self-contained-catalogs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Self-contained Catalogs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#self-contained-metadata-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      Self-contained Metadata Only
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#self-contained-with-assets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Self-contained with Assets
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#published-catalogs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Published Catalogs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#absolute-published-catalog" class="md-nav__link">
+    <span class="md-ellipsis">
+      Absolute Published Catalog
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relative-published-catalog" class="md-nav__link">
+    <span class="md-ellipsis">
+      Relative Published Catalog
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-relation-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using Relation Types
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Using Relation Types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#derived-from-relation-derived_from" class="md-nav__link">
+    <span class="md-ellipsis">
+      Derived from relation (derived_from)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#versioning-for-catalogs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Versioning for Catalogs
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Versioning for Catalogs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#static-to-dynamic-best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Static to Dynamic best practices
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Static to Dynamic best practices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ingestion-and-links" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ingestion and links
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keep-catalogs-in-sync-with-cloud-notification-and-queue-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      Keep catalogs in sync with cloud notification and queue services
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-differentiate-stac-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to Differentiate STAC Files
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table of Contents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#web-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Web Practices
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Web Practices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enable-cross-origin-resource-sharing-cors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enable Cross-origin resource sharing (CORS)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stac-on-the-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      STAC on the Web
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="STAC on the Web">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#schemaorg-json-ld-dcat-microformats-etc" class="md-nav__link">
+    <span class="md-ellipsis">
+      Schema.org, JSON-LD, DCAT, microformats, etc
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deploying-stac-browser" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deploying STAC Browser
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#requester-pays" class="md-nav__link">
+    <span class="md-ellipsis">
+      Requester Pays
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#consistent-uris" class="md-nav__link">
+    <span class="md-ellipsis">
+      Consistent URIs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#item-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Item Practices
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Item Practices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#item-ids" class="md-nav__link">
+    <span class="md-ellipsis">
+      Item IDs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#searchable-identifiers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Searchable Identifiers
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#field-selection-and-metadata-linking" class="md-nav__link">
+    <span class="md-ellipsis">
+      Field selection and Metadata Linking
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datetime-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Datetime selection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unlocated-items" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unlocated Items
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Unlocated Items">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unrectified-satellite-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unrectified Satellite Data
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-that-is-not-spatial" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data that is not spatial
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#representing-vector-layers-in-stac" class="md-nav__link">
+    <span class="md-ellipsis">
+      Representing Vector Layers in STAC
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#asset-and-link-best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Asset and Link Best Practices
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Asset and Link Best Practices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#common-use-cases-of-additional-fields-for-assets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common Use Cases of Additional Fields for Assets
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#titles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Titles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#working-with-media-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Working with Media Types
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Working with Media Types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#common-media-types-in-stac" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common Media Types in STAC
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#formats-with-no-registered-media-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      Formats with no registered media type
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#asset-roles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Asset Roles
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Asset Roles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#list-of-asset-roles" class="md-nav__link">
+    <span class="md-ellipsis">
+      List of Asset Roles
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bands" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bands
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Bands">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single-band" class="md-nav__link">
+    <span class="md-ellipsis">
+      Single band
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multiple-bands" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multiple bands
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#band-migration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Band migration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#catalog-collection-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Catalog &amp; Collection Practices
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Catalog &amp; Collection Practices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#static-and-dynamic-catalogs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Static and Dynamic Catalogs
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Static and Dynamic Catalogs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#static-catalogs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Static Catalogs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dynamic-catalogs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dynamic Catalogs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catalog-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      Catalog Layout
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Catalog Layout">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dynamic-catalog-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dynamic Catalog Layout
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mixing-stac-versions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mixing STAC Versions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-summaries-in-collections" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using Summaries in Collections
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-of-links" class="md-nav__link">
+    <span class="md-ellipsis">
+      Use of links
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Use of links">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#self-contained-catalogs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Self-contained Catalogs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#self-contained-metadata-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      Self-contained Metadata Only
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#self-contained-with-assets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Self-contained with Assets
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#published-catalogs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Published Catalogs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#absolute-published-catalog" class="md-nav__link">
+    <span class="md-ellipsis">
+      Absolute Published Catalog
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relative-published-catalog" class="md-nav__link">
+    <span class="md-ellipsis">
+      Relative Published Catalog
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-relation-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using Relation Types
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Using Relation Types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#derived-from-relation-derived_from" class="md-nav__link">
+    <span class="md-ellipsis">
+      Derived from relation (derived_from)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#versioning-for-catalogs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Versioning for Catalogs
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Versioning for Catalogs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#static-to-dynamic-best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Static to Dynamic best practices
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Static to Dynamic best practices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ingestion-and-links" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ingestion and links
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keep-catalogs-in-sync-with-cloud-notification-and-queue-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      Keep catalogs in sync with cloud notification and queue services
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-differentiate-stac-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to Differentiate STAC Files
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="stac-best-practices">STAC Best Practices</h1>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><strong><a href="#web-practices">Web Best Practices</a></strong></li>
+<li><a href="#enable-cross-origin-resource-sharing-cors">Enable Cross-origin resource sharing (CORS)</a></li>
+<li><a href="#stac-on-the-web">STAC on the Web</a><ul>
+<li><a href="#schemaorg-json-ld-dcat-microformats-etc">Schema.org, JSON-LD, DCAT, microformats, etc</a></li>
+<li><a href="#deploying-stac-browser">Deploying STAC Browser</a></li>
+</ul>
+</li>
+<li><a href="#requester-pays">Requester Pays</a></li>
+<li><a href="#consistent-uris">Consistent URIs</a></li>
+<li><strong><a href="#item-practices">Item Best Practices</a></strong></li>
+<li><a href="#item-ids">Field and ID formatting</a></li>
+<li><a href="#searchable-identifiers">Searchable Identifiers</a></li>
+<li><a href="#field-selection-and-metadata-linking">Field selection and Metadata Linking</a></li>
+<li><a href="#datetime-selection">Datetime selection</a></li>
+<li><a href="#unlocated-items">Unlocated Items</a></li>
+<li><a href="#representing-vector-layers-in-stac">Representing Vector Layers in STAC</a></li>
+<li><strong><a href="#asset-and-link-best-practices">Asset and Link Best Practices</a></strong></li>
+<li><a href="#common-use-cases-of-additional-fields-for-assets">Common Use Cases of Additional Fields for Assets</a></li>
+<li><a href="#working-with-media-types">Working with Media Types</a></li>
+<li><a href="#asset-roles">Asset Roles</a></li>
+<li><a href="#bands">Bands</a></li>
+<li><strong><a href="#catalog--collection-practices">Catalog &amp; Collection Best Practices</a></strong></li>
+<li><a href="#static-and-dynamic-catalogs">Static and Dynamic Catalogs</a><ul>
+<li><a href="#static-catalogs">Static Catalogs</a></li>
+<li><a href="#dynamic-catalogs">Dynamic Catalogs</a></li>
+</ul>
+</li>
+<li><a href="#catalog-layout">Catalog Layout</a><ul>
+<li><a href="#dynamic-catalog-layout">Dynamic Catalog Layout</a></li>
+<li><a href="#mixing-stac-versions">Mixing STAC Versions</a></li>
+</ul>
+</li>
+<li><a href="#using-summaries-in-collections">Using Summaries in Collections</a></li>
+<li><a href="#use-of-links">Use of links</a><ul>
+<li><a href="#self-contained-catalogs">Self-contained Catalogs</a></li>
+<li><a href="#published-catalogs">Published Catalogs</a></li>
+</ul>
+</li>
+<li><a href="#using-relation-types">Using Relation Types</a></li>
+<li><a href="#versioning-for-catalogs">Versioning for Catalogs</a></li>
+<li><a href="#static-to-dynamic-best-practices">Static to Dynamic best practices</a><ul>
+<li><a href="#ingestion-and-links">Ingestion and links</a></li>
+<li><a href="#keep-catalogs-in-sync-with-cloud-notification-and-queue-services">Keep catalogs in sync with cloud notification and queue services</a></li>
+</ul>
+</li>
+<li><a href="#how-to-differentiate-stac-files">How to Differentiate STAC Files</a></li>
+</ul>
+<p>This document makes a number of recommendations for creating real world SpatioTemporal Asset Catalogs. None of them 
+are required to meet the core specification, but following these practices will make life easier for client tooling
+and for users. They come about from practical experience of implementors and introduce a bit more 'constraint' for
+those who are creating STAC objects representing their data or creating tools to work with STAC. </p>
+<p>While the current goal of the core is to remain quite flexible and simple to meet a wide variety of use cases,
+in time some of these may evolve to become part of the core specification.</p>
+<h2 id="web-practices">Web Practices</h2>
+<h3 id="enable-cross-origin-resource-sharing-cors">Enable Cross-origin resource sharing (CORS)</h3>
+<p>STAC strives to make geospatial information more accessible, by putting it on the web. Fundamental to STAC's vision is that
+different tools will be able to load and display public-facing STAC data. But the web runs on a <a href="https://en.wikipedia.org/wiki/Same-origin_policy">Same origin 
+policy</a>, preventing web pages from loading information from other web locations
+to prevent malicious scripts from accessing sensitive data. This means that by default a web page would only be able to load STAC
+<a href="../item-spec/item-spec/">Item</a> objects from the same server the page is on.
+<a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing">Cross-origin resource sharing</a>,
+also known as 'CORS' is a protocol to enable safe communication across origins. But most web services turn it off by default. This
+is generally a good thing, but unfortunately if CORS is not enabled then any browser-based STAC tool will not work. </p>
+<p>So to enable all the great web tools (like <a href="http://stacindex.org">stacindex.org</a>) to work with your STAC implementation it is essential to
+'enable CORS'. Most services have good resources on how to do this, like on <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html">AWS S3</a>,
+<a href="https://cloud.google.com/storage/docs/cross-origin">Google Cloud Storage</a>, or <a href="https://enable-cors.org/server_apache.html">Apache Server</a>. 
+Many more are listed on <a href="https://enable-cors.org/server.html">enable-cors.org</a>. We recommend enabling CORS for all requests ('*'),
+so that diverse online tools can access your data. If you aren't sure if your server has CORS enabled you can use 
+<a href="https://www.test-cors.org/">test-cors.org</a>. Enter the URL of your STAC root <a href="../catalog-spec/catalog-spec/">Catalog</a> or
+<a href="../collection-spec/collection-spec/">Collection</a> JSON and make sure it gets a response.</p>
+<h3 id="stac-on-the-web">STAC on the Web</h3>
+<p>One of the primary goals of STAC is to make spatiotemporal data more accessible on the web. One would have a right to be 
+surprised that there is nothing about HTML in the entire specification. This is because it is difficult to specify what 
+should be on web pages without ending up with very bad looking pages. But the importance of having web-accessible versions
+of every STAC Item is paramount.</p>
+<p>The main recommendation is to have an HTML page for every single STAC Item, Catalog and Collection. They should be visually pleasing, 
+crawlable by search engines and ideally interactive. The current best practice is to use a tool in the STAC ecosystem called
+<a href="https://github.com/radiantearth/stac-browser/">STAC Browser</a>. It can crawl most any valid STAC implementation and generate unique web
+pages for each Item and Catalog (or Collection). While it has a default look and feel, the design can easily be 
+modified to match an existing web presence. And it will automatically turn any Item with a <a href="http://cogeo.org">Cloud Optimized 
+GeoTIFF</a> asset into an interactive, zoomable web map (using <a href="http://tiles.rdnt.io/">tiles.rdnt.io</a> to render
+the tiles on a <a href="https://leafletjs.com/">leaflet</a> map). It also attempts to encapsulate a number of best practices that enable 
+STAC Items to show up in search engines, though that part is still a work in progress - contributions to STAC Browser to help
+are welcome!</p>
+<p>Implementors are welcome to generate their own web pages, and additional tools that automatically transform STAC JSON into 
+html sites are encouraged. In time there will likely emerge a set of best practices from an array of tools, and we may be
+able to specify in the core standard how to make the right HTML pages. But for now it is useful for STAC implementations to focus on 
+making data available as JSON, and then leverage tools that can evolve at the same time to make the best HTML experience. This
+enables innovation on the web generation and search engine optimization to evolve independently from the core data.</p>
+<h4 id="schemaorg-json-ld-dcat-microformats-etc">Schema.org, JSON-LD, DCAT, microformats, etc</h4>
+<p>There is a strong desire to align STAC with the various web standards for data. These include <a href="http://schema.org">schema.org</a> 
+tags, <a href="https://json-ld.org/">JSON-LD</a> (particularly for Google's <a href="https://developers.google.com/search/docs/data-types/dataset">dataset 
+search</a>), <a href="https://www.w3.org/TR/vocab-dcat/">DCAT</a>
+and <a href="http://microformats.org/wiki/about">microformats</a>. STAC aims to work with as many as possible. Thusfar it has not seemed
+to make sense to include any of them directly in the core STAC standard. They are all more intended to be a part of the HTML
+pages that search engines crawl, so the logical place to do the integration is by leveraging a tool that generates HTML 
+from STAC like <a href="https://github.com/radiantearth/stac-browser/">STAC Browser</a>. STAC Browser has implemented a <a href="https://github.com/radiantearth/stac-spec/issues/378">mapping to 
+schema.org</a> fields using JSON-LD, but the exact output is still being
+refined. It is on the roadmap to add in more mapping and do more testing of search engines crawling the HTML pages. </p>
+<h4 id="deploying-stac-browser">Deploying STAC Browser</h4>
+<p>Most public STAC implementations have a STAC Browser hosted at <a href="https://stacindex.org/catalogs">stacindex.org</a>.
+Anyone with a public STAC implementation is welcome to have a STAC Browser instance hosted for free,
+just submit it to <a href="https://stacindex.org/add">stacindex.org</a>.
+But the stronger recommendation is to host a STAC Browser on your own domain, and to customize its 
+design to look and feel like your main web presence. STAC aims to be decentralized, so each STAC-compliant data catalog 
+should have its own location and just be part of the wider web.</p>
+<h3 id="requester-pays">Requester Pays</h3>
+<p>It is very common that large, freely available datasets are set up with a 'requester pays' configuration. This is an option 
+<a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html">on AWS</a> and <a href="https://cloud.google.com/storage/docs/requester-pays">on 
+Google Cloud</a>, that enables data providers to make their data
+available to everyone, while the cloud platform charges access costs
+(such as per-request and data '<a href="https://www.hostdime.com/blog/data-egress-fees-cloud/">egress</a>') to the user accessing the data.
+For popular datasets that are large in size the egress costs can be substantial, to the point where much
+less data would be available if the cost of distribution was always on the data provider.</p>
+<p>For data providers using STAC with requester pays buckets, there are two main recommendations:</p>
+<ol>
+<li>Put the STAC JSON in a separate bucket that is public for everyone and <strong>not</strong> requestor pays. This enables the STAC metadata
+   to be far more crawlable and searchable, but the cost of the egress of STAC files should be miniscule compared to that of
+   the actual data. The STAC community can help you work with cloud providers for potential free hosting if you are doing open
+   data as requestor pays and aren't able to pay the costs of a completely open STAC bucket, as they are most all supportive of
+   STAC (but no guarantees and it may be on an alternate cloud).</li>
+<li>For Asset href values to resources in a requestor pays bucket, use the cloud provider-specific protocol
+   (e.g., <code>s3://</code> on AWS and <code>gs://</code> on Google Cloud) instead of an <code>https://</code> url.
+   Most clients do not have special handling for <code>https://</code> links to cloud provider resources that require a requestor pays flag and authentication,
+   so they simply fail. Many clients have special handling for <code>s3://</code> or <code>gs://</code> URLs
+   that will add a requestor pays parameter and will apply appropriate authentication to the request.
+   Using cloud-specific protocols will at least give users an option to register a paid account and
+   allow the data provider to properly charge for access. 
+   STAC-specific tools in turn can look for the cloud-specific protocols and know to use the requestor pays feature for that specific cloud platform.</li>
+</ol>
+<h3 id="consistent-uris">Consistent URIs</h3>
+<p>Links in STAC can be <a href="#use-of-links">absolute or relative</a>.</p>
+<p>Relative links must be resolved against a base URL, which is the absolute URI given in the link with the relation type <code>self</code>.
+If a <code>self</code> link is not provided, the absolute URI of the resource can be used as the base URL.
+If neither of them is available, relative links can usually not be resolved and the behavior is undefined.</p>
+<p>To resolve relative URIs, the base URIs must be precise and consistent.
+Having or not having a trailing slash is significant (except if no path component is provided in a URL, see example 8).
+Without a trailing slash, the last path component is identified as a "file" and will be removed while resolving URLs.
+This means that if the trailing slash is missing for a folder,
+a relative link would need to include the last path component again to resolve correctly (see example 4).</p>
+<p>To avoid issues it is recommended to consistently add a slash at the end of the URL if it doesn't point to a file.</p>
+<p><strong>Examples:</strong></p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Base URL</th>
+<th>Relative URL</th>
+<th>Resolved URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>https://example.com/folder/catalog.json</code></td>
+<td><code>item.json</code></td>
+<td><code>https://example.com/folder/item.json</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>https://example.com/folder</code></td>
+<td><code>item.json</code></td>
+<td><code>https://example.com/item.json</code></td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>https://example.com/folder/</code></td>
+<td><code>item.json</code></td>
+<td><code>https://example.com/folder/item.json</code></td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>https://example.com/folder</code></td>
+<td><code>folder/item.json</code></td>
+<td><code>https://example.com/folder/item.json</code></td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>https://example.com/folder/</code></td>
+<td><code>folder/item.json</code></td>
+<td><code>https://example.com/folder/folder/item.json</code></td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>https://example.com/another/folder</code></td>
+<td><code>../item.json</code></td>
+<td><code>https://example.com/item.json</code></td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>https://example.com/another/folder/</code></td>
+<td><code>../item.json</code></td>
+<td><code>https://example.com/another/item.json</code></td>
+</tr>
+<tr>
+<td>8</td>
+<td><code>https://example.com</code></td>
+<td><code>folder/item.json</code></td>
+<td><code>https://example.com/folder/item.json</code></td>
+</tr>
+<tr>
+<td>9</td>
+<td><code>https://example.com/</code></td>
+<td><code>folder/item.json</code></td>
+<td><code>https://example.com/folder/item.json</code></td>
+</tr>
+</tbody>
+</table>
+<p>The relative URLs <code>folder/item.json</code> and <code>./folder/item.json</code> are equivalent.</p>
+<h2 id="item-practices">Item Practices</h2>
+<h3 id="item-ids">Item IDs</h3>
+<p>When defining one's STAC properties and fields there are many choices to make on how to name various aspects of one's
+data. One of the key properties is the ID. The specification is quite flexible on ID's, primarily so that existing
+providers can easily use their same ID when they translate their data into STAC.
+It is STRONGLY RECOMMENDED that an item ID is unique per collection.
+The use of URI or file path reserved characters such as <code>:</code> or <code>/</code> is discouraged since this will
+result in <a href="https://tools.ietf.org/html/rfc3986#section-2">percented encoded</a> <a href="https://github.com/radiantearth/stac-api-spec">STAC API</a>
+endpoints and it prevents the use of IDs as file names as recommended in the <a href="#catalog-layout">catalog layout</a> best practices.</p>
+<h3 id="searchable-identifiers">Searchable Identifiers</h3>
+<p>When coming up with values for fields that contain searchable identifiers of some sort, like <code>constellation</code> or <code>platform</code>,
+it is recommended that the identifiers consist of only lowercase characters, numbers, <code>_</code>, and <code>-</code>.
+Examples include <code>sentinel-1a</code> (Sentinel-1), <code>landsat-8</code> (Landsat-8) and <code>envisat</code> (Envisat).
+This is to provide consistency for search across Collections, so that people can just search for <code>landsat-8</code>,
+instead of thinking through all the ways providers might have chosen to name it.</p>
+<h3 id="field-selection-and-metadata-linking">Field selection and Metadata Linking</h3>
+<p>In general STAC aims to be oriented around <strong>search</strong>, centered on the core fields that users will want to search on to find 
+imagery. The core is space and time, but there are often other metadata fields that are useful. While the specification is 
+flexible enough that providers can fill it with tens or even hundreds of fields of metadata, that is not recommended. If 
+providers have lots of metadata then that can be linked to in the <a href="../commons/assets/#asset-object">Asset Object</a> 
+(recommended) or in a <a href="../commons/links/#link-object">Link Object</a>. There is a lot of metadata that is only of relevance 
+to loading and processing data, and while STAC does not prohibit providers from putting those type of fields in their items, 
+it is not recommended. For very large catalogs (hundreds of millions of records),
+every additional field that is indexed will cost substantial money, so data providers are advised to just put the fields to be searched in STAC and
+<a href="https://github.com/radiantearth/stac-api-spec">STAC API</a> providers don't have bloated indices that no one actually uses.</p>
+<h3 id="datetime-selection">Datetime selection</h3>
+<p>The <code>datetime</code> field in a STAC Item's properties is one of the most important parts of a STAC Item, providing the T (temporal) of 
+STAC. And it can also be one of the most confusing, especially for data that covers a range of times. For many types of data it
+is straightforward - it is the capture or acquisition time. But often data is processed from a range of captures - drones usually
+gather a set of images over an hour and put them into a single image, mosaics combine data from several months, and data cubes
+represent slices of data over a range of time. For all these cases the recommended path is to use <code>start_datetime</code> and 
+<code>end_datetime</code> fields from <a href="../commons/common-metadata/#date-and-time-range">common metadata</a>. The specification does allow one to set the 
+<code>datetime</code> field to <code>null</code>, but it is strongly recommended to populate the single <code>datetime</code> field, as that is what many clients 
+will search on. If it is at all possible to pick a nominal or representative datetime then that should be used. But sometimes that 
+is not possible, like a data cube that covers a time range from 1900 to 2000. Setting the datetime as 1950 would lead to it not
+being found if you searched 1990 to 2000.</p>
+<p>Extensions that describe particular types of data can and should define their <code>datetime</code> field to be more specific. For example
+a MODIS 8 day composite image can define the <code>datetime</code> to be the nominal date halfway between the two ranges. Another data type
+might choose to have <code>datetime</code> be the start. The key is to put in a date and time that will be useful for search, as that is
+the focus of STAC. If <code>datetime</code> is set to <code>null</code> then it is strongly recommended to use it in conjunction with an extension
+that explains why it should not be set for that type of data. </p>
+<h3 id="unlocated-items">Unlocated Items</h3>
+<p>Though the <a href="https://tools.ietf.org/html/rfc7946">GeoJSON standard</a> allows null geometries, in STAC we strongly recommend
+that every item have a geometry, since the general expectation of someone using a SpatioTemporal Catalog is to be able to query
+all data by space and time. But there are some use cases where it can make sense to create a STAC Item before it gets
+a geometry. The most common of these is 'level 1' satellite data, where an image is downlinked and cataloged before it has 
+been geospatially located. </p>
+<p>The recommendation for data that does not yet have a location is to follow the GeoJSON concept that it is an <a href="https://tools.ietf.org/html/rfc7946#section-3.2">'unlocated' 
+feature</a>. So if the catalog has data that is not located then it can follow 
+GeoJSON and set the geometry to null. Though normally required, in this case the <code>bbox</code> field should not be included.</p>
+<p>Note that this recommendation is only for cases where data does not yet have a geometry and it cannot be estimated. There
+are further details on the two most commonly requested desired use cases for setting geometry to null:</p>
+<h4 id="unrectified-satellite-data">Unrectified Satellite Data</h4>
+<p>Most satellite data is downlinked without information that precisely describes where it is located on Earth. A satellite 
+imagery processing pipeline will always attempt to locate it, but often that process takes a number of hours, or never
+quite completes (like when it is too cloudy). It can be useful to start to populate the Item before it has a geometry. 
+In this case the recommendation is to use the 'estimated' position from the satellite, to populate at least the bounding box,
+and use the same broad bounds for the geometry (or leaving it null) until there is precise ground lock. This estimation is 
+usually done by onboard equipment, like GPS or star trackers, but can be off by kilometers or more. But it is very useful for 
+STAC users to be able to at least find approximate area in their searches. A commonly used field for communicating ground lock 
+is not yet established, but likely should be (an extension proposal would be appreciated).  If there is no way to provide an 
+estimate then the data can be assigned a null geometry and no <code>bbox</code>, as described above. But the data will likely not
+show up in STAC API searches, as most will at least implicitly use a geometry. Though this section is written with 
+satellite data in mind, one can easily imagine other data types that start with a less precise geometry but have it 
+refined after processing.</p>
+<h4 id="data-that-is-not-spatial">Data that is not spatial</h4>
+<p>The other case that often comes up is people who love STAC and want to use it to catalog everything they have, even if it is
+not spatial. This use case is not currently supported by STAC, as we are focused on data that is both temporal and spatial
+in nature. The <a href="https://github.com/opengeospatial/ogcapi-records">OGC API - Records</a> is an emerging standard that likely
+will be able to handle a wider range of data than STAC. It builds on <a href="https://github.com/opengeospatial/ogcapi-features">OGC API - 
+Features</a> just like <a href="https://github.com/radiantearth/stac-api-spec/">STAC API</a>
+does. Using <a href="../collection-spec/collection-spec/#assets">Collection Assets</a> may also provide an option for some 
+use cases.</p>
+<h3 id="representing-vector-layers-in-stac">Representing Vector Layers in STAC</h3>
+<p>Many implementors are tempted to try to use STAC for 'everything', using it as a universal catalog of all their 'stuff'.
+The main route considered is to use STAC to describe vector layers, putting a shapefile or <a href="http://geopackage.org">geopackage</a>
+as the <code>asset</code>. Though there is nothing in the specification that <em>prevents</em> this, it is not really the right level of 
+abstraction. A shapefile or geopackage corresponds to a Collection, not a single Item. The ideal thing to do with
+one of those is to serve it with <a href="https://github.com/opengeospatial/ogcapi-features">OGC API - Features</a> standard. This
+allows each feature in the shapefile/geopackage to be represented online, and enables querying of the actual data. If
+that is not possible then the appropriate way to handle Collection-level search is with the 
+<a href="https://github.com/opengeospatial/ogcapi-records">OGC API - Records</a> standard, which is a 'brother' specification of STAC API. 
+Both are compliant with OGC API - Features, adding richer search capabilities to enable finding of data. </p>
+<h2 id="asset-and-link-best-practices">Asset and Link Best Practices</h2>
+<h3 id="common-use-cases-of-additional-fields-for-assets">Common Use Cases of Additional Fields for Assets</h3>
+<p>As <a href="../commons/assets/#additional-fields">described in the Item spec</a>, it is possible to use fields typically
+found in Item properties at the asset level. This mechanism of overriding or providing Item Properties only in the Assets 
+makes discovery more difficult and should generally be avoided. However, there are some core and extension fields for which 
+providing them at the Asset level can prove to be very useful for using the data.</p>
+<ul>
+<li><code>datetime</code>: Provide individual timestamp on an Item, in case the Item has a <code>start_datetime</code> and <code>end_datetime</code>,
+  but an Asset is for one specific time.</li>
+<li><code>gsd</code> (<a href="../commons/common-metadata/#instrument">Common Metadata</a>): Specify some assets that represent instruments 
+  with different spatial resolution than the overall best resolution. Note this should not be used for different 
+  spatial resolutions due to specific processing of assets - look into the <a href="https://github.com/stac-extensions/raster">raster 
+  extension</a> for that use case.</li>
+<li><code>bands</code> (e.g. in combination with the <a href="https://github.com/stac-extensions/eo/">EO extension</a>):
+  Provide spectral band information, and order of bands, within an individual asset.</li>
+<li><code>proj:code</code>/<code>proj:wkt2</code>/<code>proj:projjson</code> (<a href="https://github.com/stac-extensions/projection/">projection extension</a>):
+  Specify different projection for some assets. If the projection is different
+  for all assets it should probably not be provided as an Item property. If most assets are one projection, and there is 
+  a single reprojected version (such as a Web Mercator preview image), it is sensible to specify the main projection in the 
+  Item and the alternate projection for the affected asset(s).</li>
+<li><code>proj:shape</code>/<code>proj:transform</code> (<a href="https://github.com/stac-extensions/projection/">projection extension</a>):
+  If assets have different spatial resolutions and slightly different exact bounding boxes,
+  specify these per asset to indicate the size of the asset in pixels and its exact GeoTransform in the native projection.</li>
+<li><code>sar:polarizations</code> (<a href="https://github.com/stac-extensions/sar">sar extension</a>):
+  Provide the polarization content and ordering of a specific asset.</li>
+<li><code>sar:product_type</code> (<a href="https://github.com/stac-extensions/sar">sar extension</a>):
+  If mixing multiple product types within a single Item, this can be used to specify the product_type for each asset.</li>
+</ul>
+<h3 id="titles">Titles</h3>
+<p>It is recommended to always provide link titles.
+The link titles should always reflect the title of the entity it refers to.
+For example, if a STAC Item links to a STAC Collection, the value of the <code>title</code> property in the link with relation type <code>collection</code>
+should <strong>exactly</strong> match the value of the <code>title</code> property in the STAC Collection.
+Implementations should ensure that link titles are always synchronized so that inconsistencies don't occur.</p>
+<p>Providing titles enables users to search and navigate more easily through STAC catalogs,
+makes the links more predictable, and may prevent "flickering" in user-interfaces such as STAC Browser.</p>
+<p>If the entity that a link refers to has no title, the value of the <code>id</code> can be considered as an alternative.</p>
+<h3 id="working-with-media-types">Working with Media Types</h3>
+<p><a href="https://en.wikipedia.org/wiki/Media_type">Media Types</a> are a key element that enables STAC to be a rich source of information for
+clients. The best practice is to use as specific of a media type as possible (so if a file is a GeoJSON then don't use a JSON
+media type), and to use <a href="https://www.iana.org/assignments/media-types/media-types.xhtml">registered</a> IANA types as much as possible.</p>
+<p>For hierarchical links (e.g. relation types <code>root</code>, <code>parent</code>, <code>child</code>, <code>item</code>) it is important that
+clients filter for the corresponding STAC media types
+(e.g. <code>application/json</code> for all relation types and/or <code>application/geo+json</code> for relation type <code>item</code>). 
+Hierarchical links with other media types (e.g. <code>text/html</code>) may be present for hierarchical links,
+especially in STAC implementations that are also implementing OGC API - Records.</p>
+<h4 id="common-media-types-in-stac">Common Media Types in STAC</h4>
+<p>The following table lists a number of commonly used media types in STAC. The first two (GeoTIFF and COG) are not fully standardized 
+yet, but reflect the community consensus direction. There are many IANA registered types that commonly show up in STAC. The 
+following table lists some of the most common ones you may encounter or use.</p>
+<table>
+<thead>
+<tr>
+<th>Media Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>image/tiff; application=geotiff</code></td>
+<td>GeoTIFF with standardized georeferencing metadata</td>
+</tr>
+<tr>
+<td><code>image/tiff; application=geotiff; profile=cloud-optimized</code></td>
+<td><a href="https://www.cogeo.org/">Cloud Optimized GeoTIFF</a> (unofficial). Once there is an <a href="http://osgeo-org.1560.x6.nabble.com/Media-type-tc5411498.html">official media type</a> it will be added and the custom media type here will be deprecated.</td>
+</tr>
+<tr>
+<td><code>image/jp2</code></td>
+<td>JPEG 2000</td>
+</tr>
+<tr>
+<td><code>image/png</code></td>
+<td>Visual PNGs (e.g. thumbnails)</td>
+</tr>
+<tr>
+<td><code>image/jpeg</code></td>
+<td>Visual JPEGs (e.g. thumbnails, oblique)</td>
+</tr>
+<tr>
+<td><code>text/xml</code> or <code>application/xml</code></td>
+<td>XML metadata <a href="https://www.ietf.org/rfc/rfc7303.txt">RFC 7303</a></td>
+</tr>
+<tr>
+<td><code>application/json</code></td>
+<td>A JSON file (often metadata, or <a href="https://github.com/radiantearth/stac-spec/tree/master/extensions/label#labels-required">labels</a>)</td>
+</tr>
+<tr>
+<td><code>text/plain</code></td>
+<td>Plain text (often metadata)</td>
+</tr>
+<tr>
+<td><code>application/geo+json</code></td>
+<td><a href="https://geojson.org/">GeoJSON</a></td>
+</tr>
+<tr>
+<td><code>application/geopackage+sqlite3</code></td>
+<td><a href="https://www.geopackage.org/">GeoPackage</a></td>
+</tr>
+<tr>
+<td><code>application/x-hdf5</code></td>
+<td>Hierarchical Data Format version 5</td>
+</tr>
+<tr>
+<td><code>application/x-hdf</code></td>
+<td>Hierarchical Data Format versions 4 and earlier.</td>
+</tr>
+<tr>
+<td><code>application/vnd.laszip+copc</code></td>
+<td><a href="https://copc.io/">COPC</a> Cloud optimized PointCloud</td>
+</tr>
+<tr>
+<td><code>application/vnd.apache.parquet</code></td>
+<td>Apache <a href="https://geoparquet.org/">Geoparquet</a></td>
+</tr>
+<tr>
+<td><code>application/3dtiles+json</code></td>
+<td><a href="https://www.ogc.org/standard/3dtiles/">OGC 3D Tiles</a></td>
+</tr>
+<tr>
+<td><code>application/vnd.pmtiles</code></td>
+<td>Protomaps <a href="https://github.com/protomaps/PMTiles/blob/main/spec/v3/spec.md">PMTiles</a></td>
+</tr>
+</tbody>
+</table>
+<p>*Deprecation notice: GeoTiff previously used the media type <code>image/vnd.stac.geotiff</code> and
+Cloud Optimized GeoTiffs used <code>image/vnd.stac.geotiff; profile=cloud-optimized</code>.
+Both can still appear in old STAC implementations, but are deprecated and should be replaced.</p>
+<h4 id="formats-with-no-registered-media-type">Formats with no registered media type</h4>
+<p>This section gives recommendations on what to do if you have a format in your links or assets
+that does not have an IANA registered type.
+Ideally every media type used is on the <a href="https://www.iana.org/assignments/media-types/media-types.xhtml">IANA registry</a>. If
+you are using a format that is not on that list we recommend you use
+<a href="https://restcookbook.com/Resources/using-custom-content-types/">custom content type</a>.
+These typically use the <code>vnd.</code> prefix, see <a href="https://tools.ietf.org/html/rfc6838#section-3.2">RFC 6838 section-3.2</a>.
+Ideally the format provider will actually
+register the media type with IANA, so that other STAC clients can find it easily. But if you are only using it internally it is 
+<a href="https://stackoverflow.com/questions/29121241/custom-content-type-is-registering-with-iana-mandatory">acceptable to not register</a> 
+it. It is relatively easy to <a href="https://www.iana.org/form/media-types">register</a> a <code>vnd</code> media type.</p>
+<h3 id="asset-roles">Asset Roles</h3>
+<p><a href="../commons/assets/#roles">Asset roles</a> are used to describe what each asset is used for. They are particular useful 
+when several assets have the same media type, such as when an Item has a multispectral analytic asset, a 3-band full resolution 
+visual asset, a down-sampled preview asset, and a cloud mask asset, all stored as Cloud Optimized GeoTIFF (COG) images. It is 
+recommended to use at least one role for every asset available, and using multiple roles often makes sense. For example you'd use
+both <code>data</code> and <code>reflectance</code> if your main data asset is processed to reflectance, or <code>metadata</code> and <code>cloud</code> for an asset that 
+is a cloud mask, since a mask is considered a form of metadata (it's information about the data). Or if a single asset represents
+several types of 'unusable data' it might include <code>metadata</code>, <code>cloud</code>, <code>cloud-shadow</code> and <code>snow-ice</code>. If there is not a clear
+role then just pick a sensible name for the role. You are encouraged to add it to the list below and/or
+in an extension if you think the new role will have broader applicability. </p>
+<h4 id="list-of-asset-roles">List of Asset Roles</h4>
+<p>There are a number of roles that are commonly used in practice, which we recommend to reuse as much as possible.
+If you can't find suitable roles, feel free to suggest more.</p>
+<table>
+<thead>
+<tr>
+<th>Role Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>data</td>
+<td>The data itself, excluding the metadata.</td>
+</tr>
+<tr>
+<td>metadata</td>
+<td>Metadata sidecar files describing the data, for example a Landsat-8 MTL file.</td>
+</tr>
+<tr>
+<td>thumbnail</td>
+<td>An asset that represents a thumbnail of the Item or Collection, typically a RGB or grayscale image primarily for human consumption, low resolution, restricted spatial extent, and displayable in a web browser without scripts or extensions.</td>
+</tr>
+<tr>
+<td>overview</td>
+<td>An asset that represents a more detailed overview of the Item or Collection, typically a RGB or grayscale image primarily for human consumption, medium resolution, full spatial extent, in a file format that's can be visualized easily (e.g., Cloud-Optimized GeoTiff).</td>
+</tr>
+<tr>
+<td>visual</td>
+<td>An asset that represents a detailed overview of the Item or Collection, typically a RGB or grayscale image primarily for human consumption, high or native resolution (often sharpened), full spatial extent, in a file format that's can be visualized easily (e.g., Cloud-Optimized GeoTiff).</td>
+</tr>
+<tr>
+<td>date</td>
+<td>An asset that provides per-pixel acquisition timestamps, typically serving as metadata to another asset</td>
+</tr>
+<tr>
+<td>graphic</td>
+<td>Supporting plot, illustration, or graph associated with the Item</td>
+</tr>
+<tr>
+<td>data-mask</td>
+<td>File indicating if corresponding pixels have Valid data and various types of invalid data</td>
+</tr>
+<tr>
+<td>snow-ice</td>
+<td>Points to a file that indicates whether a pixel is assessed as being snow/ice or not.</td>
+</tr>
+<tr>
+<td>land-water</td>
+<td>Points to a file that indicates whether a pixel is assessed as being land or water.</td>
+</tr>
+<tr>
+<td>water-mask</td>
+<td>Points to a file that indicates whether a pixel is assessed as being water (e.g. flooding map).</td>
+</tr>
+<tr>
+<td>iso-19115</td>
+<td>Points to an <a href="https://www.iso.org/standard/53798.html">ISO 19115</a> metadata file</td>
+</tr>
+</tbody>
+</table>
+<p>Additional roles are defined in the various extensions, for example:</p>
+<ul>
+<li><a href="https://github.com/stac-extensions/eo/blob/main/README.md#best-practices">EO Extension</a></li>
+<li><a href="https://github.com/stac-extensions/view/blob/main/README.md#best-practices">View Extension</a></li>
+<li><a href="https://github.com/stac-extensions/sar/blob/main/README.md#best-practices">SAR Extension</a></li>
+</ul>
+<p>The roles <code>thumbnail</code>, <code>overview</code> and <code>visual</code> are very similar. To make choosing the right role easier, please consult the table below.</p>
+<p>They should usually be a RGB or grayscale image, which are primarily intended for human consumption, e.g., through a web browser.
+It can complement assets where one band is per file (like Landsat), by providing the key display bands combined,
+or can complement assets where many non-visible bands are included, by being a lighter weight file that just has the bands needed for display.</p>
+<p>Roles should also be combined, e.g., <code>thumbnail</code> and <code>overview</code> if the recommendations are all met.</p>
+<p>If your data for the Item does not come with a thumbnail already we do recommend generating one, which can be done quite easily with <a href="https://gdal.org/">GDAL</a> or <a href="https://rasterio.readthedocs.io/en/latest/">Rasterio</a>.</p>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>thumbnail</th>
+<th>overview</th>
+<th>visual</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Resolution</td>
+<td>Low</td>
+<td>Medium</td>
+<td>Native / High</td>
+</tr>
+<tr>
+<td><em>Recommended</em> Image dimensions</td>
+<td>&lt; 600x600 px</td>
+<td>&lt; 5000x500 px</td>
+<td>any size</td>
+</tr>
+<tr>
+<td><em>Recommended</em> File Formats</td>
+<td>PNG, JPEG, GIF, WebP</td>
+<td>PNG, JPEG, WebP, COG</td>
+<td>COG, other cloud-native and/or tiled file formats with pyramids, ...</td>
+</tr>
+<tr>
+<td>Spatial extent</td>
+<td>Limited</td>
+<td>Full</td>
+<td>Full</td>
+</tr>
+<tr>
+<td>Use case</td>
+<td>Quick overview, often in lists of items/collections</td>
+<td>Display for a single Item/Collection, sometimes shown on a web map</td>
+<td>Display for a single Item/Collection, often shown on a map, may be displayed in GIS software</td>
+</tr>
+</tbody>
+</table>
+<p>The files offered for the roles <code>thumbnail</code>, <code>overview</code> and <code>visual</code> should be accessible via HTTP(S).
+If the <a href="https://github.com/stac-extensions/alternate-assets">Alternate Asset Extension</a> is used,
+the default access mechanism should be HTTP(S).</p>
+<h3 id="bands">Bands</h3>
+<p>As of STAC 1.1, the <code>bands</code> array can be used in combination with property inheritance to provide users with more flexibility.
+The following best practices should be considered, especially when migrating from <code>eo:bands</code> and <code>raster:bands</code>.</p>
+<h4 id="single-band">Single band</h4>
+<p>Single band assets can be defined in two ways.
+Properties can be defined in the <code>bands</code> array or in the assets directly.</p>
+<p>Example using the <code>bands</code> array:</p>
+<pre><code class="language-json">{
+  &quot;assets&quot;: {
+    &quot;example&quot;: {
+      &quot;href&quot;: &quot;example.tif&quot;,
+      &quot;bands&quot;: [
+        {
+          &quot;data_type&quot;: &quot;uint16&quot;,
+          &quot;eo:common_name&quot;: &quot;red&quot;,
+          &quot;raster:spatial_resolution&quot;: 10
+        }
+      ]
+    }
+  }
+}
+</code></pre>
+<p>Example without bands:</p>
+<pre><code class="language-json">{
+  &quot;assets&quot;: {
+    &quot;example&quot;: {
+      &quot;href&quot;: &quot;example.tif&quot;,
+      &quot;data_type&quot;: &quot;uint16&quot;,
+      &quot;eo:common_name&quot;: &quot;red&quot;,
+      &quot;raster:spatial_resolution&quot;: 10
+    }
+  }
+}
+</code></pre>
+<p>STAC recommends that single band assets should only use the <code>bands</code> array in the following cases:</p>
+<ol>
+<li><strong>It's important in to convey that a band is present in the asset.</strong></li>
+<li>This is the case if the data access mechanism requires you to specify the name of index of the band to retrieve the data,
+     then the band should be specified as such.</li>
+<li>This is also the case if the band has a specific name.
+     The <code>name</code> property is only available under the <code>bands</code> array and as such can't be specified for the Asset.</li>
+<li><strong>It is important that the (often spectral) band is part of a set of bands.</strong></li>
+<li>For example, if the <code>bands</code> array is exposed in the Collection Summaries,
+     then a <code>bands</code> array should be defined in the Items or Item Assets as otherwise there's nothing to summarize.</li>
+<li><strong>Individual bands are repeated in different assets.</strong></li>
+<li>This may happen if you provide assets with different resolutions or file formats.
+     The <code>name</code> property with the same value should be used so that users can identify that the bands are the same.
+     It also enables clients to easily combine and summarize the bands.</li>
+</ol>
+<h4 id="multiple-bands">Multiple bands</h4>
+<p>Generally, all properties that have the same value across all bands should not be listed in the <code>bands</code> array but in the assets directly.</p>
+<p>For example, if your <code>bands</code> array in an asset is defined as follows:</p>
+<pre><code class="language-json">{
+  &quot;assets&quot;: {
+    &quot;example&quot;: {
+      &quot;href&quot;: &quot;example.tif&quot;,
+      &quot;bands&quot;: [
+        {
+          &quot;name&quot;: &quot;r&quot;,
+          &quot;eo:common_name&quot;: &quot;red&quot;,
+          &quot;data_type&quot;: &quot;uint16&quot;,
+          &quot;raster:spatial_resolution&quot;: 10
+        },
+        {
+          &quot;name&quot;: &quot;g&quot;,
+          &quot;eo:common_name&quot;: &quot;green&quot;,
+          &quot;data_type&quot;: &quot;uint16&quot;,
+          &quot;raster:spatial_resolution&quot;: 10
+        },
+        {
+          &quot;name&quot;: &quot;b&quot;,
+          &quot;eo:common_name&quot;: &quot;blue&quot;,
+          &quot;data_type&quot;: &quot;uint16&quot;,
+          &quot;raster:spatial_resolution&quot;: 10
+        }
+      ]
+    }
+  }
+}
+</code></pre>
+<p>The <code>data_type</code> and <code>raster:spatial_resolution</code> has the same value for all bands.
+As such you can deduplicate those properties and list them in the asset directly:</p>
+<pre><code class="language-json">{
+  &quot;assets&quot;: {
+    &quot;example&quot;: {
+      &quot;href&quot;: &quot;example.tif&quot;,
+      &quot;data_type&quot;: &quot;uint16&quot;,
+      &quot;raster:spatial_resolution&quot;: 10,
+      &quot;bands&quot;: [
+        {
+          &quot;name&quot;: &quot;r&quot;,
+          &quot;eo:common_name&quot;: &quot;red&quot;
+        },
+        {
+          &quot;name&quot;: &quot;g&quot;,
+          &quot;eo:common_name&quot;: &quot;green&quot;
+        },
+        {
+          &quot;name&quot;: &quot;b&quot;,
+          &quot;eo:common_name&quot;: &quot;blue&quot;
+        }
+      ]
+    }
+  }
+}
+</code></pre>
+<h4 id="band-migration">Band migration</h4>
+<p>It should be relatively simple to migrate from STAC 1.0 (i.e. <code>eo:bands</code> and/or <code>raster:bands</code>) to the new <code>bands</code> array.</p>
+<p>Usually, you can simply merge each object on a by-index basis.
+Nevertheless, you should consider deduplicating properties with the same values across all bands to the Asset.
+For some fields, you need to add the extension prefix of the <code>eo</code> or <code>raster</code> extension to the property name.</p>
+<p>STAC 1.0 example:</p>
+<pre><code class="language-json">{
+  &quot;assets&quot;: {
+    &quot;example&quot;: {
+      &quot;href&quot;: &quot;example.tif&quot;,
+      &quot;eo:bands&quot;: [
+        {
+          &quot;name&quot;: &quot;r&quot;,
+          &quot;common_name&quot;: &quot;red&quot;
+        },
+        {
+          &quot;name&quot;: &quot;g&quot;,
+          &quot;common_name&quot;: &quot;green&quot;
+        },
+        {
+          &quot;name&quot;: &quot;b&quot;,
+          &quot;common_name&quot;: &quot;blue&quot;
+        },
+        {
+          &quot;name&quot;: &quot;nir&quot;,
+          &quot;common_name&quot;: &quot;nir&quot;
+        }
+      ],
+      &quot;raster:bands&quot;: [
+        {
+          &quot;data_type&quot;: &quot;uint16&quot;,
+          &quot;spatial_resolution&quot;: 10,
+          &quot;sampling&quot;: &quot;area&quot;
+        },
+        {
+          &quot;data_type&quot;: &quot;uint16&quot;,
+          &quot;spatial_resolution&quot;: 10,
+          &quot;sampling&quot;: &quot;area&quot;
+        },
+        {
+          &quot;data_type&quot;: &quot;uint16&quot;,
+          &quot;spatial_resolution&quot;: 10,
+          &quot;sampling&quot;: &quot;area&quot;
+        },
+        {
+          &quot;data_type&quot;: &quot;uint16&quot;,
+          &quot;spatial_resolution&quot;: 30,
+          &quot;sampling&quot;: &quot;area&quot;
+        }
+      ]
+    }
+  }
+}
+</code></pre>
+<p>After migrating to STAC 1.1 this is ideally provided as follows:</p>
+<pre><code class="language-json">{
+  &quot;assets&quot;: {
+    &quot;example&quot;: {
+      &quot;href&quot;: &quot;example.tif&quot;,
+      &quot;data_type&quot;: &quot;uint16&quot;,
+      &quot;raster:sampling&quot;: &quot;area&quot;,
+      &quot;raster:spatial_resolution&quot;: 10,
+      &quot;bands&quot;: [
+        {
+          &quot;name&quot;: &quot;r&quot;,
+          &quot;eo:common_name&quot;: &quot;red&quot;
+        },
+        {
+          &quot;name&quot;: &quot;g&quot;,
+          &quot;eo:common_name&quot;: &quot;green&quot;
+        },
+        {
+          &quot;name&quot;: &quot;b&quot;,
+          &quot;eo:common_name&quot;: &quot;blue&quot;
+        },
+        {
+          &quot;name&quot;: &quot;nir&quot;,
+          &quot;eo:common_name&quot;: &quot;nir&quot;,
+          &quot;raster:spatial_resolution&quot;: 30
+        }
+      ]
+    }
+  }
+}
+</code></pre>
+<p>The following was done:</p>
+<ul>
+<li>The arrays have been merged into a single property <code>bands</code>.</li>
+<li>The properties <code>common_name</code> and <code>spatial_resolution</code> were renamed to include the extension prefixes.</li>
+<li>The properties <code>data_type</code> and <code>raster:sampling</code> (renamed from <code>sampling</code>) were deduplicated to the Asset
+  as the values were the same across all bands.</li>
+<li>The <code>spatial_resolution</code> was also deduplicated, i.e. <code>10</code> is provided on the asset level,
+  which is inherited by the bands unless explicitly overridden.
+  Therefore, the <code>nir</code> band overrides the value <code>10</code> with a value of <code>30</code>.</li>
+</ul>
+<p>As a result, the new <code>bands</code> array is more lightweight and easier to handle.</p>
+<h2 id="catalog-collection-practices">Catalog &amp; Collection Practices</h2>
+<p><em>Note: This section uses the term 'Catalog' (with an uppercase C) to refer to the JSON entity specified in the 
+<a href="../catalog-spec/catalog-spec/">Catalog spec</a>, and 'catalog' (with a lowercase c) to refer to any full STAC implementation, 
+which can be any mix of Catalogs, Collections, and Items.</em></p>
+<h3 id="static-and-dynamic-catalogs">Static and Dynamic Catalogs</h3>
+<p>As mentioned in the main <a href="../overview/">overview</a>, there are two main types of catalogs - static
+and dynamic. This section explains each of them in more depth and shares some best practices on each.</p>
+<h4 id="static-catalogs">Static Catalogs</h4>
+<p>A static catalog is an implementation of the STAC specification that does not respond dynamically to requests. It is simply
+a set of files on a web server that link to one another in a way that can be crawled, often stored in an cloud storage
+service like <a href="https://aws.amazon.com/s3/">Amazon S3</a>, <a href="https://azure.microsoft.com/en-us/services/storage/">Azure Storage</a> and
+<a href="https://cloud.google.com/storage/">Google Cloud Storage</a>. But any http server could expose a static catalog as files.
+The core JSON documents and link structures are encoded in the file, and work as long as things are structured properly.
+A static catalog can only really be crawled by search engines and active catalogs; it can not respond to queries.
+But it is incredibly reliable, as there are no moving parts, no clusters or databases to maintain.
+The goal of STAC is to expose as much asset metadata online as possible, so the static catalog offers a very low
+barrier to entry for anyone with geospatial assets to make their data searchable.</p>
+<p>Static catalogs tend to make extensive use of <em>sub-catalogs</em> to organize their Items into sensible browsing structures, 
+as they can only have a single representation of their catalog, since the static nature means the structure is baked in.
+While it is up to the implementor to organize the catalog, it is recommended to arrange it in a way that would make sense 
+for a human to browse a set of STAC Items in an intuitive matter.</p>
+<p>Users indicate their intent for a file to be parsed as a Collection or Catalog using the required <code>type</code> field on
+each entity. For Collections, this field must have the value <code>Collection</code>, while for Catalogs, it must have the
+value <code>Catalog</code>. Additionally, we recommend for static STACs indicate contents using the filenames <code>catalog.json</code>
+or <code>collection.json</code> to distinguish the Catalog from other JSON type files. In order to support multiple catalogs, the recommended practice 
+is to place the Catalog file in namespaces "directories". For example:</p>
+<ul>
+<li>current/catalog.json</li>
+<li>archive/catalog.json</li>
+</ul>
+<h4 id="dynamic-catalogs">Dynamic Catalogs</h4>
+<p>A dynamic catalog is implemented in software as an HTTP-based API, following the same specified JSON structure for Items, Catalogs
+and Collections. Its structure and responses are usually generated dynamically, instead of relying on a set of
+already defined files. But the result is the same, enabling the same discovery from people browsing and search engines crawling. 
+It generally indexes data for efficient responses, and aims to be easy for existing APIs to implement as a more standard interface 
+for clients to consume. A dynamic catalog will sometimes be populated by a static catalog, or at least may have a 'backup' of its 
+fields stored as a cached static catalog.</p>
+<p>Dynamic catalogs often also implement the <a href="https://github.com/radiantearth/stac-api-spec/">STAC API</a> specification, that 
+responds to search queries (like "give me all imagery in Oahu gathered on January 15, 2017"). But they are not required to.  One
+can have a dynamic service that only implements the core STAC specification, and is crawled by STAC API implementations that
+provide 'search'. For example a Content Management Service like Drupal or an open data catalog like CKAN could choose to expose 
+its content as linked STAC Items by implementing a dynamic catalog. </p>
+<p>One benefit of a dynamic catalog is that it can generate various 'views' of the catalog, exposing the same Items in 
+different sub-catalog organization structures. For example one catalog could divide sub-catalogs by date and another by
+providers, and users could browse down to both. The leaf Items should just be linked to in a single canonical location
+(or at least use a <code>rel</code> link that indicates the location of the canonical one).</p>
+<h3 id="catalog-layout">Catalog Layout</h3>
+<p>Creating a catalog involves a number of decisions as to what folder structure to use to represent sub-catalogs, Items
+and assets, and how to name them. The specification leaves this totally open, and you can link things as you want. But 
+it is recommended to be thoughtful about the organization of sub-catalogs, putting them into a structure that a person
+might reasonably browse (since they likely will with <a href="#stac-on-the-web">STAC on the Web</a> recommendations). For example
+start with location, like a normal grid (path+row in Landsat) or administrative boundaries (country -&gt; state-level) and 
+then year, month, day. Or do the opposite - date and then location. Making a huge unordered list is technically allowed,
+but not helpful for discovery of data. Thus it is generally considered a best practice to make use of sub-catalogs to 
+keep the size of each sub-catalog under a megabyte. If your sub-catalog lists tens of thousands of child items then you
+should consider an additional way to break it up. </p>
+<p>We encourage people to explore new structures of linking data, but the following list is what a number of implementors 
+ended up doing. Following these recommendations makes for more legible catalogs, and many tools operate more efficiently
+if you follow these recommendations.</p>
+<ol>
+<li>Root documents (Catalogs / Collections) should be at the root of a directory tree containing the static catalog.</li>
+<li>Catalogs should be named <code>catalog.json</code> and Collections should be named <code>collection.json</code>.</li>
+<li>Items should be named <code>&lt;id&gt;.json</code>.</li>
+<li>Sub-Catalogs or sub-Collections should be stored in subdirectories of their parent
+   (and only 1 subdirectory deeper than a document's parent, e.g. <code>.../sample/sub1/catalog.json</code>).</li>
+<li>Items should be stored in subdirectories of their parent Catalog or Collection
+   if there are usually <a href="https://en.wikipedia.org/wiki/Sidecar_file">sidecar files</a> stored alongside the Item.
+   This means that each Item and its assets are contained in a unique subdirectory unless this would regularly lead to a single Item in a directory.</li>
+<li>Limit the number of Items in a Catalog or Collection, grouping / partitioning as relevant to the dataset.</li>
+<li>Use structural elements (Catalog and Collection) consistently across each 'level' of your hierarchy.
+   For example, if levels 2 and 4 of the hierarchy only contain Collections,
+   don't add a Catalog at levels 2 and 4.</li>
+</ol>
+<p>One further recommendation to help tools is to always include the 'title' field when including a link, especially in the 
+<code>item</code>, <code>child</code>, <code>parent</code> and <code>root</code> links, even if it repeats several times. This should be the same as the 'title' in the 
+link destination. Having this enables clients to display a nice human readable name of the link without having  to open the 
+link destination. </p>
+<h4 id="dynamic-catalog-layout">Dynamic Catalog Layout</h4>
+<p>While these recommendations were primarily written for <a href="#static-catalogs">static catalogs</a>, they apply
+equally well to <a href="#dynamic-catalogs">dynamic catalogs</a>. Subdirectories of course would just be URL paths 
+generated dynamically, but the structure would be the same as is recommended.</p>
+<p>One benefit of a dynamic catalog is that it can generate various 'views' of the catalog, exposing the same Items in 
+different sub-catalog organization structures. For example one catalog could divide sub-catalogs by date and another 
+by providers, and users could browse down to both. The leaf Items should just be linked to in a single canonical location 
+(or at least use a rel link that indicates the location of the canonical one). It is recommended that dynamic catalogs 
+provide multiple 'views' to allow users to navigate in a way that makes sense to them, providing multiple 'sub-catalogs'
+from the root that enable different paths to browse (country/state, date/time, constellation/satellite, etc). But the 
+canonical 'rel' link should be used to designate the primary location of the Item to search engine crawlers.</p>
+<h4 id="mixing-stac-versions">Mixing STAC Versions</h4>
+<p>Although it is allowed to mix STAC versions, it should be used carefully as clients may not support all versions so that 
+the catalog could be of limited use to users. A Catalog or Collection linking to differently versioned Sub-Catalogs or Sub-Collections
+is a common use case when multiple data source are combined. Client developers should be aware of this use case. Nevertheless, it 
+is strongly recommended that Catalogs don't contain differently versioned Items so that users/clients can at least use and/or download
+consistent (Sub-)Catalogs containing either all or no data. Collections that are referenced from Items should always use the same
+STAC version. Otherwise some behaviour of functionality may be unpredictable (e.g. merging common fields into Items or reading summaries).</p>
+<h3 id="using-summaries-in-collections">Using Summaries in Collections</h3>
+<p>One of the strongest recommendations for STAC is to always provide <a href="../collection-spec/collection-spec/#summaries">summaries</a> in
+your Collections. The core team decided to not require them, in case there are future situations where providing a summary
+is too difficult. The idea behind them is not to exhaustively summarize every single field in the Collection, but to provide
+a bit of a 'curated' view. </p>
+<p>Some general thinking on what to summarize is as follows:</p>
+<ul>
+<li>
+<p>Any field that is a range of data (like numbers or dates) is a great candidate to summarize, to give people a sense what values
+the data might be. For example in overhead imagery, a 
+<a href="https://github.com/stac-extensions/view/blob/main/README.md#item-properties-and-item-asset-fields"><code>view:off_nadir</code></a>
+with a range of 0 to 3 would tell people this imagery is all pretty much straight down,
+while a value of 15 to 40 would tell them that it's oblique imagery, or 0 to 60 that it's 
+a Collection with lots of different look angles. </p>
+</li>
+<li>
+<p>Fields that have only one or a handful of values are also great to summarize. Collections with a single satellite may
+use a single <a href="../commons/common-metadata/#instrument"><code>gsd</code></a> field in the summary, and it's quite useful for users to know
+that all data is going to be the same resolution. Similarly it's useful to know the names of all the 
+<a href="../commons/common-metadata/#instrument"><code>platform</code> values</a> that are used in the Collection. </p>
+</li>
+<li>
+<p>It is less useful to summarize fields that have numerous different discrete values that can't easily be represented
+in a range. These will mostly be string values, when there aren't just a handful of options. For example if you had a 
+'location' field that gave 3 levels of administrative region (like 'San Francisco, California, United States') to help people
+understand more intuitively where a shot was taken. If your Collection has millions of Items, or even hundreds, you don't want
+to include all the different location string values in a summary. </p>
+</li>
+<li>
+<p>Fields that consist of arrays are more of a judgement call. For example <a href="../commons/common-metadata/#instrument"><code>instruments</code></a>
+is straightforward and recommended, as the elements of the array are a discrete set of options. On the other hand 
+<a href="https://github.com/stac-extensions/projection/blob/main/README.md#projtransform"><code>proj:transform</code></a>
+makes no sense to summarize, as the union of all the values
+in the array are meaningless, as each Item is describing its transform, so combining them would just be a bunch of random numbers.
+So if the values contained in the array are independently meaningful (not interconnected) and there aren't hundreds of potential
+values then it is likely a good candidate to summarize.</p>
+</li>
+</ul>
+<p>We do highly recommend including a <a href="../commons/common-metadata/#bands"><code>bands</code></a>
+summary if your Items implement <code>bands</code>, 
+especially if it represents just one satellite or constellation. This should be a union of all the potential bands that you 
+have in assets. It is ok to only add the summary at the Collection level without putting <code>bands</code> at the 
+<code>properties</code> level of an Item. This gives users of the Collection a sense of the sensor capabilities without 
+having to examine specific Items or aggregate across every Item.</p>
+<p>Note that the ranges of summaries don't have to be exact. If you are publishing a catalog that is constantly updating with
+data from a high agility satellite you can put the <code>view:off_nadir</code> range to be the expected values, based on the satellite
+design, instead of having it only represent the off nadir angles that are Items for assets already captured in the catalog.
+We don't want growing catalogs to have to constantly check and recalculate their summaries whenever new data comes in - its
+just meant to give users a sense of what types of values they could expect. </p>
+<h3 id="use-of-links">Use of links</h3>
+<p>The STAC specifications allow both relative and absolute links, and it is important to choose the correct link types so that
+your STAC catalogs are easy to explore and resilient to any future changes to their layouts. The best practice is to use one
+of the below catalog types, applying the link recommendations consistently, instead of just haphazardly applying relative links
+in some places and absolute ones in other places.</p>
+<h4 id="self-contained-catalogs">Self-contained Catalogs</h4>
+<p>A 'self-contained catalog' is one that is designed for portability. Users may want to download a catalog from online and be
+able to use it on their local computer, so all links need to be relative. Or a tool that creates catalogs may need to work 
+without knowing the final location that it will live at online, so it isn't possible to set absolute 'self' URL's. These use
+cases should utilize a catalog that follows the listed principles:</p>
+<ul>
+<li>
+<p><strong>Only relative href's in structural <code>links</code></strong>: The full catalog structure of links down to sub-catalogs and Items, and their 
+links back to their parents and roots, should be done with relative URL's. The structural rel types include <code>root</code>, <code>parent</code>, 
+<code>child</code>, <code>item</code>, and <code>collection</code>. Other links can be absolute, especially if they describe a resource that makes less sense in
+the catalog, like <a href="https://github.com/stac-extensions/scientific/blob/main/README.md#item-and-collection-fields">sci:doi</a>, 
+<code>derived_from</code> or even <code>license</code> (it can be nice to include the license in the catalog, but some licenses live at a canonical 
+online location which makes more sense to refer to directly). This enables the full catalog to be downloaded or
+copied to another location and to still be valid. This also implies no <code>self</code> link, as that link must be absolute.</p>
+</li>
+<li>
+<p><strong>Use Asset <code>href</code> links consistently</strong>: The links to the actual assets are allowed to be either relative or absolute. There
+are two types of 'self-contained catalogs'. </p>
+</li>
+</ul>
+<h4 id="self-contained-metadata-only">Self-contained Metadata Only</h4>
+<p>These consist of just the STAC metadata (Collection, Catalog and Item files), and uses absolute href 
+links to refer to the online locations of the assets. </p>
+<h4 id="self-contained-with-assets">Self-contained with Assets</h4>
+<p>These use relative href links for the assets, and includes them in the folder structure.
+This enables offline use of a catalog, by including all the actual data, referenced locally.</p>
+<p>Self-contained catalogs tend to be used more as static catalogs, where they can be easily passed around. But often they will
+be generated by a more dynamic STAC service, enabling a subset of a catalog or a portion of a search criteria to be downloaded
+and used in other contexts. That catalog could be used offline, or even published in another location.</p>
+<p>Self-contained catalogs are not just for offline use, however - they are designed to be able to be published online and to live
+on the cloud in object storage. They just aim to ease the burden of publishing, by not requiring lots of updating of links. 
+Adding a single <code>self</code> link at the root is recommended for online catalogs,
+turning it into a 'relative published catalog', as detailed below.
+This anchors it in an online location and enables provenance tracking.</p>
+<h4 id="published-catalogs">Published Catalogs</h4>
+<p>While STAC is useful as a portable format to move between systems, the goal is really to enable search. While any combination
+of absolute and relative links is technically allowed by the specification, it is strongly recommended to follow one of the 
+patterns described below when publishing online. Many clients will not properly handle arbitrary mixes of absolute and relative
+href's. </p>
+<p>We refer to a 'published catalog' as one that lives online in a stable location, and uses <code>self</code> links to establish its location and 
+enable easy provenance tracking. There are two types of published catalogs:</p>
+<h4 id="absolute-published-catalog">Absolute Published Catalog</h4>
+<p>This is a catalog that uses absolute links for everything, both in the <code>links</code> objects and in the
+<code>asset</code> hrefs. It includes <code>self</code> links for every Item. Generally these are implemented by dynamic catalogs, as it is quite
+easy for them to generate the proper links dynamically. But a static catalog that knows its published location could easily
+implement it.</p>
+<h4 id="relative-published-catalog">Relative Published Catalog</h4>
+<p>This is a self-contained catalog as described above, except it includes an absolute <code>self</code> link at
+the root to identify its online location. This is designed so that a self-contained catalog (of either type, with its 
+assets or just metadata) can be 'published' online
+by just adding one field (the self link) to its root (Catalog or Collection). All the other links should remain the same. The resulting catalog
+is no longer compliant with the self-contained catalog recommendations, but instead transforms into a 'relative published catalog'. 
+With this, a client may resolve Item and sub-catalog self links by traversing parent and root links, but requires reading 
+multiple sources to achieve this. </p>
+<p>So if you are writing a STAC client it is recommended to start with just supporting these two types of published catalogs. In 
+turn, if your data is published online publicly or for use on an intranet then following these recommendations will ensure
+that a wider range of clients will work with it.</p>
+<h3 id="using-relation-types">Using Relation Types</h3>
+<p>Implementors of STAC are highly recommended to be quite liberal with their <code>links</code>, and to use the <code>rel</code> field (in conjunction
+with the <code>type</code> field) to communicate the structure and content of related entities. While each STAC spec describes some of the 
+'custom' relations STAC has set, the ideal is to reuse official <a href="https://www.iana.org/assignments/link-relations/link-relations.xhtml">IANA Link Relation 
+Types</a> as much as possible. The following table describes
+a number of the common official relations that are used in production STAC implementations.</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>alternate</td>
+<td>It is recommended that STAC Items are also available as HTML, and should use this rel with <code>"type" : "text/html"</code> to tell clients where they can get a version of the Item or Collection to view in a browser. See <a href="#stac-on-the-web">STAC on the Web in Best Practices</a> for more information.</td>
+</tr>
+<tr>
+<td>canonical</td>
+<td>The URL of the <a href="https://en.wikipedia.org/wiki/Canonical_link_element">canonical</a> version of the Item or Collection. API responses and copies of catalogs should use this to inform users that they are direct copy of another STAC Item, using the canonical rel to refer back to the primary location.</td>
+</tr>
+<tr>
+<td>via</td>
+<td>The URL of the source metadata that this STAC Item or Collection is created from. Used similarly to canonical, but refers back to a non-STAC record (Landsat MTL, Sentinel metadata XML, etc)</td>
+</tr>
+<tr>
+<td>prev</td>
+<td>Indicates that the link's context is a part of a series, and that the previous in the series is the link target. Typically used in STAC by API's, to return smaller groups of Items or Catalogs/Collections.</td>
+</tr>
+<tr>
+<td>next</td>
+<td>Indicates that the link's context is a part of a series, and that the next in the series is the link target. Typically used in STAC by API's, to return smaller groups of Items or Catalogs/Collections.</td>
+</tr>
+<tr>
+<td>preview</td>
+<td>Refers to a resource that serves as a preview (see <a href="https://tools.ietf.org/html/rfc6903#section-3">RFC 6903, sec. 3</a>), usually a lower resolution thumbnail. In STAC this would usually be the same URL as the <a href="#list-of-asset-roles">thumbnail</a> asset, but adding it as a link in addition enables OGC API clients that can't read assets to make use of it. It also adds support for thumbnails to STAC Catalogs as they can't list assets.</td>
+</tr>
+<tr>
+<td>derived_from</td>
+<td>URL to a STAC Entity that was used as input data in the creation of this Entity.</td>
+</tr>
+</tbody>
+</table>
+<p>Being liberal with the <code>links</code> also means that it's ok to have repeated links with the same <code>href</code>. For example the
+<code>parent</code> and <code>root</code> relation types will point at the same file when the child is directly below the root, and it is
+recommended to include both. </p>
+<h4 id="derived-from-relation-derived_from">Derived from relation (<code>derived_from</code>)</h4>
+<p>A full provenance model is far beyond the scope of STAC,
+and the goal is to align with any good independent spec that comes along for that.
+But the <code>derived_from</code> field is seen as a way to encourage fuller specs and at least start a linking
+structure that can be used as a jumping off point for more experiments in provenance tracking.</p>
+<h3 id="versioning-for-catalogs">Versioning for Catalogs</h3>
+<p>In the Item and Collection STAC JSON, versions and deprecation can be indicated with the
+<a href="https://github.com/stac-extensions/version">Versioning Indicators Extension</a>.</p>
+<p>The <a href="https://github.com/stac-extensions/version/">Items and Collections API Version Extension</a> provides endpoints and 
+semantics for keeping and accessing previous versions of Collections and Items. The same semantics can be used in static 
+catalogs to preserve previous versions of the documents and link them together.</p>
+<p>In order to achieve this, the static catalog must make sure that for every record created, a copy of the record is also 
+created in a separate location and it is named with the version id adopted by the catalog. See 
+<a href="https://github.com/stac-extensions/version/blob/main/README.md#version-id">here</a> for recommendations on versioning schema.</p>
+<p>The main record should also provide a link to the versioned record following the linking patterns described 
+<a href="https://github.com/stac-extensions/version/blob/main/README.md#relation-types">here</a>. For every update to the record, the same 
+cycle is repeated:</p>
+<ol>
+<li>Add link from the updated record to the previous version</li>
+<li>Create a copy of the updated record and name it correctly</li>
+</ol>
+<h4 id="example">Example</h4>
+<p>When the record <code>my_item.json</code> is created, a copy of it is also created. <code>my_item.json</code> includes <code>permalink</code> to <code>my_item_01.json</code>.
+The version suffix of the file name is taken from the version field of the record when it is available.</p>
+<ul>
+<li><code>root / collections / example_collection / items / my_item / my_item.json</code></li>
+<li><code>root / collections / example_collection / items / my_item / my_item_01.json</code></li>
+</ul>
+<p>When <code>my_item.json</code> is updated, the new <code>my_item.json</code> includes a link to <code>my_item_01.json</code> and is also copied to <code>my_item_02.json</code>.
+This ensures that <code>my_item_02.json</code> includes a link to <code>my_item_01.json</code></p>
+<ul>
+<li><code>root / collections / example_collection / items / my_item / my_item.json</code></li>
+<li><code>root / collections / example_collection / items / my_item / my_item_01.json</code></li>
+<li><code>root / collections / example_collection / items / my_item / my_item_02.json</code></li>
+</ul>
+<h3 id="static-to-dynamic-best-practices">Static to Dynamic best practices</h3>
+<p>Many implementors are using static catalogs to be the reliable core of their dynamic services, or layering their STAC API
+on top of any static catalog that is published. These are some recommendations on how to handle this:</p>
+<h4 id="ingestion-and-links">Ingestion and links</h4>
+<p>Implementors have found that it's best to 'ingest' a static STAC into an internal datastore (often elasticsearch, but a 
+traditional database could work fine too) and then generate the full STAC API responses from that internal representation.
+There are instances that have the API refer directly to the static STAC Items, but this only works well if the static STAC 
+catalog is an 'absolute published catalog'. So the recommendation is to always use absolute links - either in the static 
+published catalog, or to create new absolute links for the STAC search/ endpoint 
+responses, with the API's location at the base url. The <code>/</code> endpoint with the catalog could either link directly
+to the static catalog, or can follow the 'dynamic catalog layout' recommendations above with a new set of URL's.</p>
+<p>Ideally each Item would use its <code>links</code> to provide a reference back to the static location. The location of the static
+Item should be treated as the canonical location, as the generated API is more likely to move or be temporarily down. The
+spec provides the <code>derived_from</code> rel field, which fits well enough, but <code>canonical</code> is likely the more appropriate one
+as everything but the links should be the same.</p>
+<h4 id="keep-catalogs-in-sync-with-cloud-notification-and-queue-services">Keep catalogs in sync with cloud notification and queue services</h4>
+<p>There is a set of emerging practices to use services like Amazon's Simple Queue Service (SQS)
+and Simple Notification Service (SNS) to keep catalogs in sync.
+There is a great <a href="https://aws.amazon.com/blogs/publicsector/keeping-a-spatiotemporal-asset-catalog-stac-up-to-date-with-sns-sqs/">blog post</a>
+on the CBERS STAC implementation on AWS.
+The core idea is that a static catalog should emit a notification whenever it changes. The recommendation for SNS is to use the STAC 
+Item JSON as the message body, with some fields such as a scene’s datetime and geographic bounding box that allows 
+basic geographic filtering from listeners. </p>
+<p>The dynamic STAC API would then listen to the notifications and update its internal datastore whenever new data comes into
+the static catalog. Implementors have had success using AWS Lambda to do a full 'serverless' updating of the elasticsearch
+database, but it could just as easily be a server-based process.</p>
+<h2 id="how-to-differentiate-stac-files">How to Differentiate STAC Files</h2>
+<p>Any tool that crawls a STAC implementation or encounters a STAC file in the wild needs a clear way to determine if it is an Item, 
+Collection or Catalog. As of 1.0.0 this is done primarily
+with the <code>type</code> field, and secondarily in Items with <code>stac_version</code>, or optionally with the <code>rel</code> of the link to it.</p>
+<pre><code class="language-shell">if type is 'Collection'
+  =&gt; Collection
+else if type is 'Catalog'
+  =&gt; Catalog
+else if type is 'Feature' and stac_version is defined
+  =&gt; Item
+else
+  =&gt; Invalid (JSON)
+</code></pre>
+<p>When crawling a STAC implementation, one can also make use of the <a href="../catalog-spec/catalog-spec/#relation-types">relation type</a> (<code>rel</code> field) when following a link. If it is an <code>item</code> rel type then the file must be a STAC Item. If it is <code>child</code>, <code>parent</code> or
+<code>root</code> then it must be a Catalog or a Collection, though the final determination between the two requires looking at the <code>type</code> field
+in the Catalog or Collection JSON that it is linked to. Note that there is also a <code>type</code> field in STAC Link and Asset objects, but that
+is for the Media Type, but there are not specific media types for Catalog and Collection.
+See the sections on <a href="../commons/links/#stac-media-types">STAC media types</a>,
+and <a href="../commons/assets/#media-types">Asset media types</a> for more information.</p>
+<p>In versions of STAC prior to 1.0 the process was a bit more complicated, as there was no <code>type</code> field for catalogs and collections.
+See <a href="https://github.com/radiantearth/stac-spec/issues/889#issuecomment-684529444">this issue comment</a> for a heuristic that works
+for older STAC versions.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://bsky.app/profile/stacspec.bsky.social" target="_blank" rel="noopener" title="bsky.app" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M407.8 294.7c-3.3-.4-6.7-.8-10-1.3 3.4.4 6.7.9 10 1.3M288 227.1c-26.1-50.7-97.1-145.2-163.1-191.8C61.6-9.4 37.5-1.7 21.6 5.5 3.3 13.8 0 41.9 0 58.4S9.1 194 15 213.9c19.5 65.7 89.1 87.9 153.2 80.7 3.3-.5 6.6-.9 10-1.4-3.3.5-6.6 1-10 1.4-93.9 14-177.3 48.2-67.9 169.9C220.6 589.1 265.1 437.8 288 361.1c22.9 76.7 49.2 222.5 185.6 103.4 102.4-103.4 28.1-156-65.8-169.9-3.3-.4-6.7-.8-10-1.3 3.4.4 6.7.9 10 1.3 64.1 7.1 133.6-15.1 153.2-80.7C566.9 194 576 75 576 58.4s-3.3-44.7-21.6-52.9c-15.8-7.1-40-14.9-103.2 29.8C385.1 81.9 314.1 176.4 288 227.1"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.linkedin.com/showcase/stacspec" target="_blank" rel="noopener" title="www.linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77m282.1 320h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>
